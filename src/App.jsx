@@ -4,7 +4,7 @@ import { FaStar } from 'react-icons/fa';
 
 export default function App() {
 
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
   const handleRating = (rating) => {
@@ -14,6 +14,11 @@ export default function App() {
 
   const handleSubmit = () => {
     setSubmitted(!submitted);
+  }
+
+  const handleRestart = () => {
+    setSubmitted(!submitted);
+    setRating(null);
   }
 
   return (
@@ -38,7 +43,7 @@ export default function App() {
           ))}
         </div>
         <div>
-          <button onClick={handleSubmit} type="button" className='w-full py-3 px-4 rounded-full bg-orange-400 text-center text-gray-200 font-medium uppercase'>Submit</button>
+          <button onClick={handleSubmit} type="button" disabled={rating === null} className='disabled:opacity-50 w-full py-3 px-4 rounded-full bg-orange-400 text-center text-gray-200 font-medium uppercase'>Submit</button>
         </div>
       </div>
       ) : (
@@ -60,7 +65,7 @@ export default function App() {
             </motion.p>
             <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0}} transition={{ type: 'tween', duration: 1.5 }} className='text-gray-400 font-light text-md'>We appreciate you taking the time to give is a rating. If you ever need more support, don't hesitate to get in touch.</motion.p>
           </div>
-          <button onClick={handleSubmit} className='py-2 px-4 rounded-full text-orange-400/50 text-center'>Restart</button>
+          <button onClick={handleRestart} className='py-2 px-4 rounded-full text-orange-400/50 text-center'>Restart</button>
         </div>
       )}
     </div>
